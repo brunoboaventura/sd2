@@ -45,8 +45,27 @@ public class Avaliacao2Trabalhador extends Thread {
 
             String nomeAluno;
             String respostasCliente;
+            
+            File arquivoNotas = new File ("/home/bruno/notas.txt");
+
+
+            Scanner lerArquivo;
 
             respostasCliente = entrada.nextLine();
+
+
+            
+            if (respostasCliente.equalsIgnoreCase("--listar-notas"))
+            {
+                lerArquivo = new Scanner(arquivoNotas);
+                while (lerArquivo.hasNextLine()) {
+                    saida.println (lerArquivo.nextLine());
+                }
+                lerArquivo.close();
+                s.close();
+                return;
+            }
+            
 
             for (int i = 0; i < gabarito.length(); i++) {
                 char cCliente = respostasCliente.charAt(i);
@@ -70,8 +89,7 @@ public class Avaliacao2Trabalhador extends Thread {
 
             List<String> listaNotas = new ArrayList<String>();
             
-            File arquivoNotas = new File ("/home/bruno/notas.txt");
-            Scanner lerArquivo = new Scanner(arquivoNotas);
+            lerArquivo = new Scanner(arquivoNotas);
             while (lerArquivo.hasNextLine()) {
                 String linha = lerArquivo.nextLine();
                 listaNotas.add(linha);
